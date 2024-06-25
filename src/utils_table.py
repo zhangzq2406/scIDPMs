@@ -139,5 +139,6 @@ def genera(model, genera_loader, nsample=100, scaler=1, mean_scaler=0, foldernam
         cond_mask_all_ndarray = torch.cat(cond_mask_all, dim=0).cpu().numpy()
         indices = np.where(cond_mask_all_ndarray == 1)
         observed_data_all_ndarray[indices] = imputed_samples_ndarray[indices]
-        pd.DataFrame(imputed_samples_ndarray).to_csv(f'./imputed.csv', header=False, index=False)
-
+        observed_data_all_ndarray = np.abs(
+            (observed_data_all_ndarray * (max_arr + 1) - 1))
+        pd.DataFrame(observed_data_all_ndarray).to_csv(f'./imputed.csv', header=False, index=False)

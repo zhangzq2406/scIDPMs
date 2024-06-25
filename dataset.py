@@ -103,14 +103,13 @@ class tabular_dataset(Dataset):
                 pickle.dump(
                     [self.observed_values, self.observed_masks, self.gt_masks, self.true_masks], f
                 )
-            print("--------Dataset created--------")
+
 
         elif os.path.isfile(processed_data_path_norm):
             with open(processed_data_path_norm, "rb") as f:
                 self.observed_values, self.observed_masks, self.gt_masks, self.true_masks = pickle.load(
                     f
                 )
-            print("--------Normalized dataset loaded--------")
 
         if use_index_list is None:
             self.use_index_list = np.arange(len(self.observed_values))
